@@ -11,13 +11,26 @@ return new class extends Migration
      */
     public function up(): void
     {
-       Schema::create('media', function (Blueprint $table) {
-    $table->id();
-    $table->morphs('mediable'); // model_id + model_type
-    $table->string('collection_name')->nullable();
-    $table->text('original_url');
-    $table->timestamps();
-});
+//        Schema::create('media', function (Blueprint $table) {
+//     $table->id();
+//     $table->morphs('mediable'); 
+//     $table->string('collection_name')->nullable();
+//     $table->text('original_url');
+//     $table->timestamps();
+// });
+
+
+Schema::create('media', function (Blueprint $table) {
+            $table->id();
+
+            // Nullable polymorphic columns
+            $table->unsignedBigInteger('mediable_id')->nullable();
+            $table->string('mediable_type')->nullable();
+
+            $table->string('collection_name')->nullable();
+            $table->text('original_url');
+            $table->timestamps();
+        });
 
     }
 

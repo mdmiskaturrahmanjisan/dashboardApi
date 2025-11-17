@@ -9,20 +9,24 @@ use App\Http\Controllers\Api\{
     ServiceController,
     MediaController,
     SubCategoryController,
-    PublicController
+    PublicController,
+    DashboardController,
 };
 
 // Public endpoint
 Route::get('/data', [PublicController::class, 'index']);
 
-// CRUD endpoints
 Route::apiResource('banners', BannerController::class);
 Route::apiResource('categories', CategoryController::class);
 Route::apiResource('coupons', CouponController::class);
 Route::apiResource('services', ServiceController::class);
-Route::apiResource('media', MediaController::class);
+Route::apiResource('sub-categories', SubCategoryController::class);
+Route::get('/media', [MediaController::class, 'index']);
+Route::post('/media', [MediaController::class, 'store']);
+Route::post('/media/attach', [MediaController::class, 'attach']);
+Route::post('/media/detach', [MediaController::class, 'detach']);
+Route::get('/dashboard', [DashboardController::class, 'index']);
 
-// Subcategory nested route
-Route::get('/categories/{parentId}/subcategories', [SubCategoryController::class, 'index']);
-Route::post('/categories/{parentId}/subcategories', [SubCategoryController::class, 'store']);
+
+
 

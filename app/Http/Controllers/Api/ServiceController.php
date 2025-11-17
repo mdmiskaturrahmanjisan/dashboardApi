@@ -10,7 +10,8 @@ class ServiceController extends Controller
 {
     public function index()
     {
-        return Service::with(['media', 'user'])->get();
+        return Service::with(['media', 'user', 'category'])->get();
+
     }
 
     public function store(Request $request)
@@ -24,6 +25,7 @@ class ServiceController extends Controller
             'price' => 'required|numeric|min:0',
             'service_rate' => 'required|numeric|min:0',
             'type' => 'required|string',
+            'category_id' => 'nullable|integer|exists:categories,id',
             'status' => 'boolean',
             'user_id' => 'nullable|integer',
         ]);

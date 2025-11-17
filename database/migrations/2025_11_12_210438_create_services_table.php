@@ -21,6 +21,7 @@ return new class extends Migration
     $table->decimal('price', 10, 2);
     $table->decimal('service_rate', 10, 2);
     $table->string('type')->default('fixed');
+    $table->unsignedBigInteger('category_id')->nullable();
     $table->boolean('status')->default(1);
     $table->unsignedBigInteger('user_id')->nullable();
     $table->timestamps();

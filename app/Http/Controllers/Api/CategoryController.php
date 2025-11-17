@@ -10,32 +10,42 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        return Category::with(['media', 'subCategories.media'])->whereNull('parent_id')->get();
+        return Category::with(['media'])->get();
     }
+
+    // public function store(Request $request)
+    // {
+    //     $validated = $request->validate([
+    //         'title' => 'required|string|max:255',
+    //     ]);
+
+    //     $category = Category::create($validated);
+
+    //     return response()->json($category->load(['media']), 201);
+    // }
+
 
     public function store(Request $request)
-    {
-        $validated = $request->validate([
-            'title' => 'required|string|max:255',
-            'parent_id' => 'nullable|integer|exists:categories,id',
-        ]);
+{
+    $validated = $request->validate([
+        'title' => 'required|string|max:255',
+    ]);
 
-        $category = Category::create($validated);
-
-        return response()->json($category->load(['media', 'subCategories.media']), 201);
-    }
+    $category = Category::create($validated);
+    return response()->json($category->load('media'), 201);
+}
 
     public function show($id)
     {
-        return Category::with(['media', 'subCategories.media'])->findOrFail($id);
+        return Category::with(['media'])->findOrFail($id);
     }
 
     public function update(Request $request, $id)
     {
         $category = Category::findOrFail($id);
-        $category->update($request->only(['title', 'parent_id']));
+        $category->update($request->only(['title']));
 
-        return response()->json($category->load(['media', 'subCategories.media']));
+        return response()->json($category->load(['media']));
     }
 
     public function destroy($id)
