@@ -11,6 +11,7 @@ use App\Http\Controllers\Api\{
     SubCategoryController,
     PublicController,
     DashboardController,
+    AssignmentController,
 };
 
 // Public endpoint
@@ -26,6 +27,8 @@ Route::post('/media', [MediaController::class, 'store']);
 Route::post('/media/attach', [MediaController::class, 'attach']);
 Route::post('/media/detach', [MediaController::class, 'detach']);
 Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::post('/assign-customers', [AssignmentController::class, 'assign']);
+
 
 
 

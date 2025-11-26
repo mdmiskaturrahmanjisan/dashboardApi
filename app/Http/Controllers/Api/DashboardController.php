@@ -19,7 +19,6 @@ class DashboardController extends Controller
             'total_banners'        => Banner::count(),
             'total_services'       => Service::count(),
             'total_service_amount' => Service::sum('price'),
-
             // optional
             'total_users'          => User::count(),
         ]);
